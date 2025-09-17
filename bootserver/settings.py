@@ -24,9 +24,10 @@ import os
 SECRET_KEY = os.environ.get("SECRET_KEY","fallback-secret")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG")=="True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(",")
+VERIFY_TOKEN = os.environ.get("VERIFY_TOKEN")
 
 
 # Application definition
