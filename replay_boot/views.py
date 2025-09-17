@@ -7,8 +7,9 @@ from rest_framework import status
 from .models import Product
 from django.conf import settings
 import requests
+from django.conf import settings
 # Create your views here.
-verify_token = 'hi'
+verify_token = settings.VERIFY_TOKEN
 class productList(APIView):
 
     def get_queryset(self):
