@@ -1,8 +1,5 @@
-pip>=25.2
-setuptools
-wheel
 asgiref==3.8.1
-attrs==22.2.0
+attrs==20.3.0
 certifi==2024.8.30
 cffi==1.17.1
 charset-normalizer==3.3.2
@@ -18,7 +15,7 @@ flatbuffers==24.3.25
 humanfriendly==10.0
 idna==3.10
 imageio==2.35.1
-jellyfish==1.2.0
+jellyfish==0.11.2
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
 lazy_loader==0.4
@@ -45,7 +42,7 @@ PyMatting==1.1.12
 pyreadline3==3.5.4
 PyYAML==6.0.2
 referencing==0.35.1
-rembg==2.0.53
+rembg==2.0.59
 requests==2.32.3
 rpds-py==0.20.0
 scikit-image==0.24.0
@@ -60,8 +57,3 @@ tqdm==4.66.5
 tzdata==2024.1
 urllib3==2.2.3
 whitenoise==6.10.0
-
-
-
-
-
