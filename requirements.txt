@@ -18,7 +18,7 @@ flatbuffers==24.3.25
 humanfriendly==10.0
 idna==3.10
 imageio==2.35.1
-jellyfish==1.0.0
+jellyfish==1.2.0
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
 lazy_loader==0.4
@@ -60,6 +60,7 @@ tqdm==4.66.5
 tzdata==2024.1
 urllib3==2.2.3
 whitenoise==6.10.0
+
 
 
 
