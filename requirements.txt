@@ -1,3 +1,4 @@
+python == 3.12.3
 asgiref==3.8.1
 attrs==20.3.0
 certifi==2024.8.30
@@ -58,5 +59,6 @@ tqdm==4.66.5
 tzdata==2024.1
 urllib3==2.2.3
 whitenoise==6.10.0
+
 
 
