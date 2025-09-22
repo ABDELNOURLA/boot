@@ -16,7 +16,7 @@ class productList(APIView):
     
     def get(self,request):
         if request.GET.get("hub.verify_token")==verify_token:
-            return Response(request.Get.get("hub.challenge"))
+            return Response(request.GET.get("hub.challenge"))
         return Response("Token Error",status=status.HTTP_403_FORBIDDEN)
     
 
