@@ -26,7 +26,7 @@ class productList(APIView):
     
 
     def send_message(self, sender_id, text):
-        url = "https://graph.facebook.com/v19.0/me/messages"
+        url = "https://graph.facebook.com/v23.0/me/messages"
         params = {"access_token": settings.PAGE_ACCESS_TOKEN}
         data = {
             "recipient": {"id": sender_id},
