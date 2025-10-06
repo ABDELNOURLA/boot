@@ -7,7 +7,10 @@ from rest_framework import status
 from .models import Product
 from django.conf import settings
 import requests
+
 verify_token = settings.VERIFY_TOKEN
+
+
 class productList(APIView):
 
     def get_queryset(self):
@@ -20,11 +23,10 @@ class productList(APIView):
         challenge = request.GET.get("hub.challenge")
 
         if mode == "subscribe" and token == verify_token:
-            return HttpResponse(challenge, status=200)  # نص عادي، مش JSON
+            return HttpResponse(challenge, status=200)  
         return HttpResponse("Token Error", status=403)
 
     
-
     def send_message(self, sender_id, text):
         url = "https://graph.facebook.com/v23.0/me/messages"
         params = {"access_token": settings.PAGE_ACCESS_TOKEN}
@@ -33,6 +35,7 @@ class productList(APIView):
             "message": {"text": text}
         }
         requests.post(url, params=params, json=data)
+
 
     def post(self, request):
         data = request.data
@@ -43,8 +46,19 @@ class productList(APIView):
                     for event in entry["messaging"]:
                         sender_id = event["sender"]["id"]  # PSID
                         if "message" in event:
-                            # أي رسالة تجيك → رد بـ "hello"
                             self.send_message(sender_id, "hello")
 
-        return HttpResponse("EVENT_RECEIVED", status=200)
+                if "changes" in entry:
+                    for change in entry["changes"]:
+                        value = change.get("value", {})
+                        if value.get("item") == "comment":
+                            comment_text = value.get("message", "")
+                            commenter = value.get("from", {})
+                            commenter_id = commenter.get("id")
+                            commenter_name = commenter.get("name")
 
+                            if commenter_id:
+                                text = f"مرحبًا {commenter_name}! شكراً لتعليقك: {comment_text}"
+                                self.send_message(commenter_id, text)
+
+        return HttpResponse("EVENT_RECEIVED", status=200)
