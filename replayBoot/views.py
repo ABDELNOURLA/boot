@@ -58,6 +58,7 @@ class productList(APIView):
                             self.send_message(sender_id, "مرحبًا 👋! تم استلام رسالتك.")
 
                 # ✅ جزء التعليقات (Feed Comments)
+            print(entry)
                 if "changes" in entry:
                     for change in entry["changes"]:
                         value = change.get("value", {})
