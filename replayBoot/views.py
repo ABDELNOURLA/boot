@@ -40,15 +40,13 @@ class productList(APIView):
         response = requests.post(url, params=params, json=data)
         print("📤 Message sent:", response.text)
 
-    # ✅ استقبال الأحداث من فيسبوك (تعليقات + رسائل)
     def post(self, request):
         data = request.data
-        print("📩 Received data:", data)  # لمعرفة ما يصل من Meta
+        print('#data#',data) 
 
         if "entry" in data:
             for entry in data["entry"]:
 
-                # ✅ جزء الرسائل (Messenger)
                 if "messaging" in entry:
                     for event in entry["messaging"]:
                         sender_id = event["sender"]["id"]  # PSID
@@ -57,8 +55,6 @@ class productList(APIView):
                             print(f"💬 New message from {sender_id}: {message_text}")
                             self.send_message(sender_id, "مرحبًا 👋! تم استلام رسالتك.")
 
-                # ✅ جزء التعليقات (Feed Comments)
-            print(entry)
                 if "changes" in entry:
                     for change in entry["changes"]:
                         value = change.get("value", {})
