@@ -46,13 +46,6 @@ class productList(APIView):
 
         if "entry" in data:
             for entry in data["entry"]:
-                if "messaging" in entry:
-                    for event in entry["messaging"]:
-                        sender_id = event["sender"]["id"]  # PSID
-                        if "message" in event:
-                            message_text = event["message"].get("text", "")
-                            print(f"💬 New message from {sender_id}: {message_text}")
-                            self.send_message(sender_id, "مرحبًا 👋! تم استلام رسالتك.")
                 if "changes" in entry:
                     for change in entry["changes"]:
                         value = change.get("value", {})
