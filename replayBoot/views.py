@@ -44,21 +44,27 @@ class productList(APIView):
         data = request.data
         print('#data#',data) 
 
+    def post(self, request):
+        data = json.loads(request.body)  # استخدام json.loads إذا لم تستخدم DRF
+        print('#data#', data)
+
         if "entry" in data:
             for entry in data["entry"]:
                 if "changes" in entry:
                     for change in entry["changes"]:
                         value = change.get("value", {})
-                        if value.get("item") == "comment":  # تحقق أن الحدث تعليق
+                        # تحقق أن الحدث تعليق
+                        if value.get("item") == "comment":
                             comment_text = value.get("message", "")
+                            # التحقق من معرف التعليق سواء كان 'id' أو 'comment_id'
+                            comment_id = value.get("comment_id") or value.get("id")
                             commenter = value.get("from", {})
-                            commenter_id = commenter.get("id")
-                            commenter_name = commenter.get("name")
+                            commenter_name = commenter.get("name", "مستخدم")
 
                             print(f"🗨️ New comment from {commenter_name}: {comment_text}")
 
-                            if commenter_id:
-                                reply_text = f"مرحبًا {commenter_name}! 👋 شكراً لتعليقك: {comment_text}"
-                                self.send_message(commenter_id, reply_text)
+                            if comment_id:
+                                reply_text = " يرجئ الاعجاب بصفحتنا لنستطيع الرد علئ اسئلتك او الاتصال علئ الرقم :0658984615"
+                                self.reply_to_comment(comment_id, reply_text)
 
         return HttpResponse("EVENT_RECEIVED", status=200)
