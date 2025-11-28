@@ -8,6 +8,8 @@ from .models import Product
 from django.conf import settings
 import requests
 import json
+import time
+import random
 
 verify_token = settings.VERIFY_TOKEN
 
@@ -40,9 +42,11 @@ class productList(APIView):
         }
         response = requests.post(url, params=params, json=data)
         print("📤 Message sent:", response.text)
+    
 
     def reply_to_comment(self, comment_id, text):
-        """رد على التعليق نفسه على المنشور"""
+        
+        time.sleep(random.randint(3, 7))
         url = f"https://graph.facebook.com/v17.0/{comment_id}/comments"
         payload = {"message": text}
         params = {"access_token": settings.PAGE_ACCESS_TOKEN}
