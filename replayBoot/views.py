@@ -40,9 +40,13 @@ class productList(APIView):
         response = requests.post(url, params=params, json=data)
         print("📤 Message sent:", response.text)
 
-    def post(self, request):
-        data = request.data
-        print('#data#',data) 
+    def reply_to_comment(self, comment_id, text):
+        """رد على التعليق نفسه على المنشور"""
+        url = f"https://graph.facebook.com/v17.0/{comment_id}/comments"
+        payload = {"message": text}
+        params = {"access_token": self.PAGE_ACCESS_TOKEN}
+        response = requests.post(url, data=payload, params=params)
+        print("Reply status:", response.status_code, response.text)
 
     def post(self, request):
         data = json.loads(request.body)  # استخدام json.loads إذا لم تستخدم DRF
