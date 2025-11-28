@@ -7,6 +7,7 @@ from rest_framework import status
 from .models import Product
 from django.conf import settings
 import requests
+import json
 
 verify_token = settings.VERIFY_TOKEN
 
