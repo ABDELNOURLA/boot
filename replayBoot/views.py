@@ -45,7 +45,7 @@ class productList(APIView):
         """رد على التعليق نفسه على المنشور"""
         url = f"https://graph.facebook.com/v17.0/{comment_id}/comments"
         payload = {"message": text}
-        params = {"access_token": self.PAGE_ACCESS_TOKEN}
+        params = {"access_token": settings.PAGE_ACCESS_TOKEN}
         response = requests.post(url, data=payload, params=params)
         print("Reply status:", response.status_code, response.text)
 
